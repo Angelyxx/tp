@@ -228,6 +228,8 @@ By using ScheduleDescriptor object, we are able to keep the same level of abstra
 An alternative is to create a ClearSchedule feature that clears the schedule and scheduleName, as the schedule feature can only
 write and override, but not remove.
 
+
+
 ### Mark Feature (implemented by Angel)
 The user can mark contacts of interest through the Mark Command respectively.
 
@@ -252,7 +254,7 @@ When a new `person` is created via the `AddCommand`, the markStatus is set to fa
 If a contact has been un-marked, the UI will display "☆" as the string representation for the `Mark` attribute.
 
 The following sequence diagram shows how the un-mark operation works:
-![UnMarkSequenceDiagram](images/UnMarkSequenceDiagram.png)
+![MarkSequenceDiagram](images/UnMarkSequenceDiagram.png)
 
 ### \[Proposed\] Undo/redo feature
 
