@@ -7,6 +7,7 @@ import connexion.commons.core.LogsCenter;
 import connexion.model.person.Person;
 import connexion.model.person.Schedule;
 import connexion.model.tag.Tag;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -56,26 +57,32 @@ public class PersonViewPanel extends UiPart<Region> {
     /**
      * Creates a {@code PersonViewPanel} with the given {@code Person} and index to display.
      */
-    public PersonViewPanel(Person person) {
+    public PersonViewPanel(ObservableList<Person> singlePersonList) {
         super(FXML);
-        this.person = person;
-        name.setText(person.getName().getDetailString());
-        phone.setText(person.getPhone().getDetailString());
-        company.setText(person.getCompany().getDetailString());
-        job.setText(person.getJob().getDetailString());
-        email.setText(person.getEmail().getDetailString());
-        markStatus.setText(person.getMarkStatus().toString());
-        person.getTags().stream()
-                .sorted(Comparator.comparing(Tag::getValue))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.getListString())));
-        lastModifiedDateTime.setText(
-                String.format("Last modified : %s", person.getLastModifiedDateTime().toString()));
-        schedule.setText(person.getSchedule()
-                .map(Schedule::getDetailString).orElse(""));
-        scheduleName.setText(person.getScheduleName()
-                .map(Object::toString).orElse("No scheduled meetings with this person yet"));
-        //note.setText(person.getNote.getDetailString());
-        note.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam volutpat, quam ac vehicula.");
+        this.person = singlePersonList.get(0);
+
+        if (person.equals(null)) {
+            this.noteHeader.setText("");
+            this.name.setText("Welcome to Connexion!");
+        } else {
+            name.setText(person.getName().getDetailString());
+            phone.setText(person.getPhone().getDetailString());
+            company.setText(person.getCompany().getDetailString());
+            job.setText(person.getJob().getDetailString());
+            email.setText(person.getEmail().getDetailString());
+            markStatus.setText(person.getMarkStatus().toString());
+            person.getTags().stream()
+                    .sorted(Comparator.comparing(Tag::getValue))
+                    .forEach(tag -> tags.getChildren().add(new Label(tag.getListString())));
+            lastModifiedDateTime.setText(
+                    String.format("Last modified : %s", person.getLastModifiedDateTime().toString()));
+            schedule.setText(person.getSchedule()
+                    .map(Schedule::getDetailString).orElse(""));
+            scheduleName.setText(person.getScheduleName()
+                    .map(Object::toString).orElse("No scheduled meetings with this person yet"));
+            //note.setText(person.getNote.getDetailString());
+            note.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam volutpat, quam ac vehicula.");
+        }
     }
 
     /**

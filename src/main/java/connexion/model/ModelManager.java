@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import connexion.commons.core.GuiSettings;
 import connexion.commons.core.LogsCenter;
 import connexion.model.person.Person;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 
@@ -24,6 +25,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
+    private final ObservableList<Person> displayPerson;
     private Clock clock;
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs, using the system default clock.
@@ -46,6 +48,8 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        displayPerson = this.addressBook.getDisplayPerson();
+        //FXCollections.singletonObservableList
         this.clock = Clock.systemDefaultZone();
 
     }
@@ -144,13 +148,20 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
-    /**
-     * Returns an unmodifiable view of the {@code Person}
-     * {@code versionedAddressBook}
-     */
+    @Override
+    public void setDisplayPerson(Person person) {
+        requireAllNonNull(person);
+        addressBook.setDisplayPerson(person);
+    }
+
 
 
     //=========== Filtered Person List Accessors =============================================================
+
+    @Override
+    public ObservableList<Person> getDisplayPerson() {
+        return displayPerson;
+    }
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
@@ -160,6 +171,14 @@ public class ModelManager implements Model {
     public ObservableList<Person> getFilteredPersonList() {
         return filteredPersons;
     }
+
+    @Override
+    public void updateSinglePersonList(Person person) {
+        requireNonNull(person);
+        displayPerson.clear();
+        displayPerson.add(person);
+    }
+
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {

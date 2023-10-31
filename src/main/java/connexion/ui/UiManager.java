@@ -48,7 +48,7 @@ public class UiManager implements Ui {
             if (logic.getFilteredPersonList().size() > 0) {
                 personToDisplay = logic.getFilteredPersonList().get(0);
             }
-            mainWindow.fillInnerParts();
+            mainWindow.fillInfo();
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));
             showFatalErrorDialogAndShutdown("Fatal error during initializing", e);
@@ -59,17 +59,17 @@ public class UiManager implements Ui {
         return new Image(MainApp.class.getResourceAsStream(imagePath));
     }
 
-    /**
-     * changes the displayed person
-     * @param p the new person to be displayed.
-     */
-    public static void updatePersonView(Person p) {
-        mainWindow.fillContactInfo(p);
-        personToDisplay = p;
-    }
-    public static void updatePersonView() {
-        mainWindow.fillInnerParts();
-    }
+//    /**
+//     * changes the displayed person
+//     * @param p the new person to be displayed.
+//     */
+//    public static void updatePersonView(Person p) {
+//        mainWindow.fillContactInfo(p);
+//        personToDisplay = p;
+//    }
+//    public static void updatePersonView() {
+//        mainWindow.fillInnerParts();
+//    }
 
     void showAlertDialogAndWait(AlertType type, String title, String headerText, String contentText) {
         showAlertDialogAndWait(mainWindow.getPrimaryStage(), type, title, headerText, contentText);

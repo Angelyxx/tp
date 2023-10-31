@@ -31,6 +31,8 @@ public interface Logic {
      */
     ReadOnlyAddressBook getAddressBook();
 
+    ObservableList<Person> getDisplayPerson();
+
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
 

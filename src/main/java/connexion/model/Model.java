@@ -88,8 +88,15 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    void setDisplayPerson(Person person);
+
+    /** Returns an unmodifiable view of the person to display */
+    ObservableList<Person> getDisplayPerson();
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
+
+    void updateSinglePersonList(Person person);
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.

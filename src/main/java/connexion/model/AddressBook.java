@@ -6,6 +6,7 @@ import java.util.List;
 
 import connexion.commons.util.ToStringBuilder;
 import connexion.model.person.Person;
+import connexion.model.person.SinglePersonList;
 import connexion.model.person.UniquePersonList;
 import javafx.collections.ObservableList;
 
@@ -16,6 +17,7 @@ import javafx.collections.ObservableList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final SinglePersonList displayPerson;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -26,6 +28,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        displayPerson = new SinglePersonList();
     }
 
     public AddressBook() {}
@@ -120,10 +123,23 @@ public class AddressBook implements ReadOnlyAddressBook {
                 .toString();
     }
 
+    public void setDisplayPerson(Person key) {
+        requireNonNull(key);
+        displayPerson.setPerson(key);
+    }
+
+
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
     }
+
+
+    @Override
+    public ObservableList<Person> getDisplayPerson() {
+        return displayPerson.asUnmodifiableObservableList();
+    }
+
 
     @Override
     public boolean equals(Object other) {

@@ -113,38 +113,40 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Fills up all the placeholders of this window.
      */
-    void fillInnerParts() {
-        //empty contact list
-        if (logic.getFilteredPersonList().size() == 0) {
-            personViewPanel = new PersonViewPanel();
-            fillInfo();
-        } else {
-            //default view - the first person
-            Person defaultPerson = logic.getFilteredPersonList().get(0);
-            fillContactInfo(defaultPerson);
-        }
-    }
+//    void fillInnerParts() {
+//        //empty contact list
+//        if (logic.getFilteredPersonList().size() == 0) {
+//            personViewPanel = new PersonViewPanel();
+//            fillInfo();
+//        } else {
+//            //default view - the first person
+//            Person defaultPerson = logic.getFilteredPersonList().get(0);
+//            fillContactInfo(defaultPerson);
+//        }
+//    }
 
     /**
      * Fills up information for the personViewPanel
      */
-    public void fillContactInfo(Person p) {
-        if (logic.getFilteredPersonList().size() == 0) {
-            personViewPanel = new PersonViewPanel();
-        } else {
-            personViewPanel = new PersonViewPanel(p);
-
-        }
-        fillInfo();
-    }
+//    public void fillContactInfo(Person p) {
+//        if (logic.getFilteredPersonList().size() == 0) {
+//            personViewPanel = new PersonViewPanel();
+//        } else {
+//            personViewPanel = new PersonViewPanel(p);
+//
+//        }
+//        fillInfo();
+//    }
 
     /**
      * Fills in information for the UI
      */
     public void fillInfo() {
 
-        this.personViewPanelPlaceholder.getChildren().clear(); //clear current object in panel
-        this.personViewPanelPlaceholder.getChildren().add(personViewPanel.getRoot());
+//        this.personViewPanelPlaceholder.getChildren().clear(); //clear current object in panel
+//        this.personViewPanelPlaceholder.getChildren().add(personViewPanel.getRoot());
+        personViewPanel = new PersonViewPanel(logic.getDisplayPerson());
+        personViewPanelPlaceholder.getChildren().add(personViewPanel.getRoot());
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());

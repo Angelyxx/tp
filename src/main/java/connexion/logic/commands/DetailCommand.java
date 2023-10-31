@@ -40,7 +40,8 @@ public class DetailCommand extends Command {
         }
 
         Person personToDetail = lastShownList.get(targetIndex.getZeroBased());
-        UiManager.updatePersonView(personToDetail);
+        //UiManager.updatePersonView(personToDetail);
+        model.updateSinglePersonList(personToDetail);
         return new CommandResult(String.format(MESSAGE_DETAIL_SUCCESS, Messages.format(personToDetail)));
     }
 
