@@ -60,6 +60,7 @@ public class AddCommand extends Command {
         }
 
         model.addPerson(toAdd);
+        model.setDetailedPerson(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
